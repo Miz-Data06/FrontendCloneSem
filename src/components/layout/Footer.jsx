@@ -1,0 +1,156 @@
+import logo from "../../assets/icons/coinbaseLogoNavigation-4.svg";
+import xLight from "../../assets/icons/x-light.svg";
+import linkedinLight from "../../assets/icons/linkedin-light.svg";
+import instagramLight from "../../assets/icons/instagram-light.svg";
+import tiktokLight from "../../assets/icons/tiktok-light.svg";
+import downloadApp from "../../assets/images/download-app.png";
+import googlePlay from "../../assets/images/google-play.png";
+import appStore from "../../assets/images/app-store.png";
+import { Globe } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { footerColumns } from "../../data/footerData";
+
+function FooterSection({ title, links }) {
+    return (
+        <div className="mb-7">
+            <h3 className="mb-2 text-[13px] font-semibold text-black">
+                {title}
+            </h3>
+
+            <div className="flex flex-col gap-1">
+                {links.map((link) => (
+                    <button
+                        key={link}
+                        type="button"
+                        className="text-left text-[13px] leading-6 text-slate-600 hover:text-black"
+                    >
+                        {link}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+function Footer() {
+    const location = useLocation();
+    const isLearnPage = location.pathname === "/learn";
+
+    return (
+        <footer className="mt-0 border-t border-gray-200 bg-white">
+            <div className={`mx-auto w-full max-w-7xl px-6 md:px-14 pt-16 md:pt-20 ${isLearnPage ? "pb-0" : "pb-12 md:pb-20"}`}>
+
+                {/* Main Footer */}
+                <div className="grid grid-cols-1 lg:grid-cols-[160px_1fr] gap-10 md:gap-14">
+
+                    {/* Logo & Social Icons (Mobile) */}
+                    <div className="pt-1 flex flex-col items-start gap-8 lg:block lg:gap-0 lg:pt-1">
+                        <img src={logo} alt="Coinbase" className="h-10 md:h-14 w-auto" loading="lazy" />
+                        
+                        {/* Mobile Social Icons - Hidden on Desktop */}
+                        <div className="flex lg:hidden items-center gap-6">
+                            <button type="button" className="opacity-70 hover:opacity-100 transition-opacity">
+                                <img src={xLight} alt="X" className="h-[14px] w-auto" loading="lazy" />
+                            </button>
+                            <button type="button" className="opacity-70 hover:opacity-100 transition-opacity">
+                                <img src={linkedinLight} alt="LinkedIn" className="h-[14px] w-auto" loading="lazy" />
+                            </button>
+                            <button type="button" className="opacity-70 hover:opacity-100 transition-opacity">
+                                <img src={instagramLight} alt="Instagram" className="h-[14px] w-auto" loading="lazy" />
+                            </button>
+                            <button type="button" className="opacity-70 hover:opacity-100 transition-opacity">
+                                <img src={tiktokLight} alt="TikTok" className="h-[14px] w-auto" loading="lazy" />
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Footer Columns */}
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 max-w-6xl">
+
+                        {footerColumns.map((column, index) => (
+                            <div key={index}>
+                                {column.map((section) => (
+                                    <FooterSection
+                                        key={section.title}
+                                        title={section.title}
+                                        links={section.links}
+                                    />
+                                ))}
+                            </div>
+                        ))}
+
+                    </div>
+
+                </div>
+
+                {/* Desktop Social Icons - Hidden on Mobile */}
+                <div className="hidden lg:flex mt-8 mb-6 items-center gap-8">
+                    <button type="button" className="opacity-70 hover:opacity-100 transition-opacity">
+                        <img src={xLight} alt="X" className="h-[14px] w-auto" loading="lazy" />
+                    </button>
+                    <button type="button" className="opacity-70 hover:opacity-100 transition-opacity">
+                        <img src={linkedinLight} alt="LinkedIn" className="h-[14px] w-auto" loading="lazy" />
+                    </button>
+                    <button type="button" className="opacity-70 hover:opacity-100 transition-opacity">
+                        <img src={instagramLight} alt="Instagram" className="h-[14px] w-auto" loading="lazy" />
+                    </button>
+                    <button type="button" className="opacity-70 hover:opacity-100 transition-opacity">
+                        <img src={tiktokLight} alt="TikTok" className="h-[14px] w-auto" loading="lazy" />
+                    </button>
+                </div>
+
+                {/* Bottom Bar: Copyright & Language */}
+                <div className="border-t border-gray-200 mt-8 lg:mt-0 pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-0">
+
+                    {/* Copyright */}
+                    <div className="text-sm text-gray-600 flex flex-wrap items-center gap-2">
+                        <span>© 2026 Coinbase</span>
+                        <span className="hidden sm:inline">•</span>
+                        <button type="button" className="hover:text-black">Privacy</button>
+                        <span className="hidden sm:inline">•</span>
+                        <button type="button" className="hover:text-black">Terms &amp; Conditions</button>
+                    </div>
+
+                    {/* Language */}
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <Globe size={16} />
+                        <span>Global</span>
+                        <span>•</span>
+                        <span>English</span>
+                    </div>
+                </div>
+
+                {/* Absolute Bottom: Legal Disclaimer + Download App (ONLY ON LEARN PAGE) */}
+                {isLearnPage && (
+                    <div className="mt-8 grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-8 md:gap-10 items-start border-t border-gray-200 pt-8">
+
+                        {/* Left: Download the App */}
+                        <div>
+                            <img src={downloadApp} alt="Download the App" className="h-[18px] w-auto mb-4" loading="lazy" />
+                            <div className="flex flex-row lg:flex-col gap-4">
+                                <button type="button">
+                                    <img src={googlePlay} alt="Get it on Google Play" className="h-[30px] md:h-[35px] w-auto rounded-[6px]" loading="lazy" />
+                                </button>
+                                <button type="button">
+                                    <img src={appStore} alt="Download on the App Store" className="h-[30px] md:h-[35px] w-auto rounded-[6px]" loading="lazy" />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Right: Legal Disclaimer */}
+                        <p className="text-[12px] md:text-[13px] leading-[1.6] text-gray-500">
+                            Information provided on this Site is for general educational purposes only and is not intended to constitute investment or other advice on financial products. Such information is not, and should not be read as, an offer or recommendation to buy or sell or a solicitation of an offer or recommendation to buy or sell any particular digital asset or to use any particular investment strategy. Coinbase and its affiliates (collectively "Coinbase") makes no representations as to the accuracy, completeness, timeliness, suitability, or validity of any information on this Site and will not be liable for any errors, omissions, or delays in this information or any losses, injuries, or damages arising from its display or use. Unless otherwise noted, all images are the property of Coinbase. Coinbase is not registered or licensed with the U.S. Securities and Exchange Commission or the U.S. Commodity Futures Trading Commission. Links provided to third-party sites are for informational purposes. Such sites are not under the control of Coinbase, and Coinbase is not responsible for the accuracy of the content on such third-party sites.
+                        </p>
+
+                    </div>
+                )}
+
+                <p className="border-t border-gray-200 mt-8 pt-6 text-center text-[12px] md:text-[13px] text-gray-500">
+                    This is a demo project. Do not enter real personal information.
+                </p>
+            </div>
+        </footer>
+    );
+}
+
+export default Footer;
