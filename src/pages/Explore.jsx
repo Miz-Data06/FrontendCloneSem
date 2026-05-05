@@ -9,7 +9,6 @@ import ExploreCTA from "./sections/explore/ExploreCTA";
 import ExploreSidebar from "./sections/explore/ExploreSidebar";
 import TopMovers from "./sections/explore/TopMovers";
 import NewOnCoinbase from "./sections/explore/NewOnCoinbase";
-import MarketCard from "../components/crypto/MarketCard";
 
 import chart1 from "../assets/images/chart-1.png";
 import chart2 from "../assets/images/chart-2.png";
@@ -182,18 +181,6 @@ function Explore() {
             <div className="border-t border-[#e5e7eb]" />
             <MarketStats statsCards={statsCards} />
             <div className="border-t border-[#e5e7eb]" />
-            <div className="px-6 md:px-9 pt-12 md:pt-16">
-              <MarketCard
-                coinsByTab={marketCardCoinsByTab}
-                initialTab="tradable"
-                isLoading={isLoadingCrypto}
-              />
-              {cryptoError && (
-                <p className="mt-4 text-[14px] font-medium text-[#ea3943]">
-                  {cryptoError}
-                </p>
-              )}
-            </div>
             <CryptoPrices coins={coins} assetCharts={assetCharts} />
             <ExploreCTA />
           </div>

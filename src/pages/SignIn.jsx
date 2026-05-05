@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 import api from "../api/api";
 import { setAuthSession } from "../utils/auth";
 import AuthLayout from "../components/layout/AuthLayout";
@@ -15,6 +16,7 @@ function SignIn() {
   });
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -74,15 +76,24 @@ function SignIn() {
           required
         />
 
-        <AuthInput 
-          label="Password"
-          name="password"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Your password"
-          required
-        />
+        <div className="relative">
+          <AuthInput 
+            label="Password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Your password"
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-5 bottom-[21px] text-[#5b616e] hover:text-black"
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
+        </div>
 
         {error && (
           <p className="mt-4 text-[14px] font-medium text-red-600">

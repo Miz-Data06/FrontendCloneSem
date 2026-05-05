@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../api/api";
 import AuthLayout from "../components/layout/AuthLayout";
@@ -7,6 +7,7 @@ import AuthSocialButtons from "../components/common/AuthSocialButtons";
 import Button from "../components/common/Button";
 
 function SignUp() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -40,12 +41,7 @@ function SignUp() {
 
     try {
       await api.post("/auth/register", formData);
-      setSuccessMessage("Account created successfully. You can now sign in.");
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-      });
+      navigate("/signin");
     } catch (requestError) {
       setError(getErrorMessage(requestError));
     } finally {
